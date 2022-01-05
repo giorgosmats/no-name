@@ -1,6 +1,8 @@
 package gr.noname.mvc;
 
+import gr.noname.middleware.entities.Comment;
 import gr.noname.middleware.entities.Person;
+import gr.noname.middleware.repositories.CommentRepository;
 import gr.noname.middleware.repositories.PersonRepository;
 import gr.noname.mvc.models.PersonSearch;
 import org.springframework.data.domain.Page;
@@ -14,6 +16,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,7 +26,7 @@ import java.util.stream.IntStream;
 public class PersonWebController {
     private final PersonRepository repository;
 
-    PersonWebController(PersonRepository repository) { this.repository = repository; }
+    PersonWebController(PersonRepository repository, CommentRepository commentRepository) { this.repository = repository; }
 
     @PostMapping("/people")
     public Object searchPeopleSubmit(
@@ -67,6 +70,7 @@ public class PersonWebController {
         model.addAttribute("searchModel", new PersonSearch(searchByEmail));
         return "people";
     }
+
 
     @GetMapping("/people/update/{id}")
     public String updatePerson(@PathVariable("id") long id, Model model) {

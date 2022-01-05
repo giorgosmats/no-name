@@ -78,7 +78,7 @@
                     <li class="page-item" th:each="pageNumber : ${pageNumbers}">
                         <a class="page-link"
                            th:style="${pageNumber == page ? 'background:#c7c7c7;' : 'background:initial;'}"
-                           th:href="@{/comments(size=${comments.size}, page=${pageNumber}, searchByEmail=${searchModel.email})}"
+                           th:href="@{/comments(size=${comments.size}, page=${pageNumber}, searchByComment=${searchModel.comment})}"
                            th:text="${pageNumber}"></a>
                     </li>
 
@@ -86,7 +86,7 @@
                     <li class="page-item">
                         <a class="page-link"
                            th:style="${comments.hasNext ? 'pointer-events:initial;' : 'pointer-events:none;color:#c5c4c4'}"
-                           th:href="@{/comments(size=${comments.size}, page=${page + 1}, searchByEmail=${searchModel.email})}"
+                           th:href="@{/comments(size=${comments.size}, page=${page + 1}, searchByComment=${searchModel.comment})}"
                            aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                             <span class="sr-only">Next</span>

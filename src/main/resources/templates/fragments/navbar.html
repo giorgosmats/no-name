@@ -20,18 +20,22 @@
                     <a class="nav-link" aria-current="page" th:href="@{/}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/people}">People</a>
+                    <a class="nav-link" th:href="@{/people}" th:classappend="${#request.requestURI.equals('/people') ? 'active':''}">People</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/comments}">Comments</a>
+                    <a class="nav-link" th:href="@{/comments}" th:classappend="${#request.requestURI.equals('/comments') ? 'active':''}">Comments</a>
                 </li>
 <!--                <li class="nav-item">-->
 <!--                    <a class="nav-link disabled">Disabled</a>-->
 <!--                </li>-->
             </ul>
-            <form class="d-flex" th:action="@{/people}" th:object="${searchModel}" method="post">
-                <input class="form-control me-2" th:field="*{email}"  type="search" placeholder="Search person by email" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+            <form class="d-flex" th:action="@{/people}" th:object="${searchModel}" method="post" th:if="${#request.requestURI.equals('/people')}">
+                <input class="form-control me-2" th:field="*{email}"  type="search" placeholder="Search by email" aria-label="Search"> <!--th:disabled="${#request.requestURI.equals('/comments')}" -->
+                <button class="btn btn-outline-success" type="submit">Search</button> <!--th:disabled="${#request.requestURI.equals('/comments')}" -->
+            </form>
+            <form class="d-flex" th:action="@{/comments}" th:object="${searchModel}" method="post" th:if="${#request.requestURI.equals('/comments')}">
+                <input class="form-control me-2" th:field="*{comment}"  type="search" placeholder="Search by comment" aria-label="Search"> <!--th:disabled="${#request.requestURI.equals('/comments')}" -->
+                <button class="btn btn-outline-success" type="submit">Search</button> <!--th:disabled="${#request.requestURI.equals('/comments')}" -->
             </form>
         </div>
     </div>
