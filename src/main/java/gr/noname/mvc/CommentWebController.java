@@ -1,6 +1,7 @@
 package gr.noname.mvc;
 
 import gr.noname.middleware.entities.Comment;
+import gr.noname.middleware.entities.Person;
 import gr.noname.middleware.repositories.CommentRepository;
 import gr.noname.mvc.models.CommentSearch;
 import gr.noname.mvc.models.PersonSearch;
@@ -10,6 +11,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -71,23 +74,70 @@ public class CommentWebController {
     }
 
     @GetMapping("/people/comments/{id}")
-    public String personComments(@PathVariable("id") long id, Model model) {
+    public Object personComments(@PathVariable("id") long id, Model model, @RequestParam(defaultValue = "1") int page,
+    @RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "") String searchByComment)
+    {
         List<Comment> comments = new ArrayList<>();
         List<Comment> allComments = repository.findAll();
 //        System.out.println(allComments[(int)id].getPerson());
         for (Comment comment : allComments) {
             if (comment.getPerson().getId().equals(id)) {
                 comments.add(comment);
-                System.out.println(id);
+//                System.out.println(id);
             }
+        }
+        if (page < 1) {
+            return new RedirectView("/comments?page=1&size="+ size);
+        };
+        Page<Comment> c = findPaginated(comments, PageRequest.of(page - 1, size));
+        int totalPages = c.getTotalPages();
+
+        if (page > totalPages) {
+            return new RedirectView("/comments?size="+ size + "&page=" + totalPages);
+        };
+
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(Math.max(1, page-2), Math.min(page + 2, totalPages))
+                    .boxed()
+                    .collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
         }
 
 
-        model.addAttribute("comments", comments);
+        model.addAttribute("page", page);
+        model.addAttribute("comments", c);
+        model.addAttribute("searchModel", new CommentSearch(searchByComment));
         return "person-comments";
     }
 
+    @GetMapping("/comments/update/{id}")
+    public String updateComments(@PathVariable("id") long id, Model model) {
+        Comment newcomment = repository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("No comment Id:" + id));
 
+        model.addAttribute("newcomment", newcomment);
+        return "update-comment";
+    }
+
+    @PostMapping("/comments/update/{id}")
+    public Object updateComment(@PathVariable("id") long id, @Validated @ModelAttribute("newcomment")Comment newcomment,
+                               BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            newcomment.setId(id);
+            return "update-comment";
+        }
+
+        repository.save(newcomment);
+        return "redirect:/comments";
+    }
+
+    @GetMapping("/comments/delete/{id}")
+    public String deleteComment(@PathVariable("id") long id, Model model) {
+        Comment oldcomment = repository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid person Id:" + id));
+        repository.delete(oldcomment);
+        return "redirect:/comments";
+    }
 
 
     private Page<Comment> findPaginated(List<Comment> comments, Pageable pageable) {

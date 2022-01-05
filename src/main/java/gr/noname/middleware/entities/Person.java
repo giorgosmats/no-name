@@ -2,6 +2,8 @@ package gr.noname.middleware.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 
 import javax.persistence.*;
@@ -10,6 +12,8 @@ import java.util.List;
 import java.util.Set;
 
 @Data
+//@Getter
+//@Setter
 @Entity
 //@Document(collection = "person") //gia mongo
 public class Person {
@@ -52,13 +56,5 @@ public class Person {
         this.contactDetails = contactDetails;
     }
 
-
-//    public String getEmail() {
-//        return email;
-//    }
-//
-//    public void setEmail(String email) {
-//        this.email = email;
-//    }
 
 }

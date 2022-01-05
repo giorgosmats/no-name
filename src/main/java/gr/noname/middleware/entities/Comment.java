@@ -1,11 +1,16 @@
 package gr.noname.middleware.entities;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 
 //@Document(collection = "comment") // gia mongo
-@Data
+@Getter
+@Setter
+//@Data
 @Entity
 public class Comment {
 
@@ -36,19 +41,4 @@ public class Comment {
         this.person = person;
     }
 
-//    public Long getId() {
-//        return id;
-//    }
-//
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
-//
-//    public Person getPerson() {
-//        return person;
-//    }
-//
-//    public void setPerson(Person person) {
-//        this.person = person;
-//    }
 }
