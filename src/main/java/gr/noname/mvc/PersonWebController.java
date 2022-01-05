@@ -74,30 +74,30 @@ public class PersonWebController {
 
     @GetMapping("/people/update/{id}")
     public String updatePerson(@PathVariable("id") long id, Model model) {
-        Person person = repository.findById(id)
+        Person newperson = repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid person Id:" + id));
 
-        model.addAttribute("person", person);
+        model.addAttribute("newperson", newperson);
         return "update-person";
     }
 
     @PostMapping("/people/update/{id}")
-    public String updatePerson(@PathVariable("id") long id, @Validated Person person,
+    public String updatePerson(@PathVariable("id") long id, @Validated @ModelAttribute("newperson") Person newperson,
                             BindingResult result, Model model) {
         if (result.hasErrors()) {
-            person.setId(id);
+            newperson.setId(id);
             return "update-person";
         }
 
-        repository.save(person);
+        repository.save(newperson);
         return "redirect:/people";
     }
 
     @GetMapping("/people/delete/{id}")
     public String deletePerson(@PathVariable("id") long id, Model model) {
-        Person person = repository.findById(id)
+        Person oldperson = repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid person Id:" + id));
-        repository.delete(person);
+        repository.delete(oldperson);
         return "redirect:/people";
     }
 
