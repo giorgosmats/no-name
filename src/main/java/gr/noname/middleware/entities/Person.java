@@ -52,4 +52,13 @@ public class Person {
         this.contactDetails = contactDetails;
     }
 
+
+//    public String getEmail() {
+//        return email;
+//    }
+//
+//    public void setEmail(String email) {
+//        this.email = email;
+//    }
+
 }

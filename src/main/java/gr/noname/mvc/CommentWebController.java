@@ -63,7 +63,7 @@ public class CommentWebController {
 
         model.addAttribute("page", page);
         model.addAttribute("comments", comments);
-//        model.addAttribute("searchModel", new PersonSearch(searchByEmail));
+        model.addAttribute("searchModel", new PersonSearch(searchByEmail));
         return "comments";
     }
 
