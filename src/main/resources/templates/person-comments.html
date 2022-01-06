@@ -16,7 +16,10 @@
 
 <div id="comments-list" class="row" >
     <div class="col-md-12" th:switch="${comments.totalElements}">
-        <h2 th:case="0">No comment found!</h2>
+        <div th:case="0">
+            <p>No comment found!</p>
+            <a class="col-md-2" th:href="@{/comments/addcomment/{id}(id=${userid})}" >Add Comment</a>
+        </div>
         <div th:case="*" >
             <!--                <h2>People</h2>-->
 

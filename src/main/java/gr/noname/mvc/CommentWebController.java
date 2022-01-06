@@ -97,10 +97,10 @@ public class CommentWebController {
         int totalPages = c.getTotalPages();
 
         if (page > totalPages) {
-            return new RedirectView("/comments?size="+ size + "&page=" + totalPages);
+            //return new RedirectView("/comments?size="+ size + "&page=" + totalPages);
         };
 
-        if (totalPages > 0) {
+        if (totalPages >= 0) {
             List<Integer> pageNumbers = IntStream.rangeClosed(Math.max(1, page-2), Math.min(page + 2, totalPages))
                     .boxed()
                     .collect(Collectors.toList());
