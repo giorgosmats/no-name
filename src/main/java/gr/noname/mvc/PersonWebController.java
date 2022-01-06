@@ -1,6 +1,7 @@
 package gr.noname.mvc;
 
 import gr.noname.middleware.entities.Comment;
+import gr.noname.middleware.entities.Gender;
 import gr.noname.middleware.entities.Person;
 import gr.noname.middleware.repositories.CommentRepository;
 import gr.noname.middleware.repositories.PersonRepository;
@@ -73,13 +74,15 @@ public class PersonWebController {
 
     @GetMapping("/people/addperson")
     public String addPerson(Model model) {
+        model.addAttribute("gender_value", Gender.values());
         model.addAttribute("person", new Person());
         return "create-person";
     }
 
     @PostMapping("/people/addperson")
     public String addPerson(@Validated @ModelAttribute("person")Person person, BindingResult result, Model model) {
-        if (result.hasErrors()) {
+        if (result.hasErrors() || result.hasErrors()) {
+            model.addAttribute("gender_value", Gender.values());
             return "create-person";
         }
 

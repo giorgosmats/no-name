@@ -43,7 +43,7 @@
         </div>
         <div class="form-group">
             <label>Contact Details</label>
-            <input type="text" th:field="*{contactDetails}" id="contactDetails" placeholder="contactDetails" class="form-control" >
+            <input type="text" th:field="*{contactDetails}" id="contactDetails" placeholder="phone number (69xxxxxxxx)" class="form-control" pattern="[69][0-9]{9}">
             <span th:if="${#fields.hasErrors('contactDetails')}" th:errors="*{contactDetails}"></span>
         </div>
         <div class="form-group">

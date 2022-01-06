@@ -37,6 +37,7 @@ public class Person {
     private String gender;
     @NotBlank(message = "Can't be empty")
     private String address;
+//    @Pattern(regexp = "^\\d{10}$", message = "Phone number must be 10 digits")
     @NotBlank(message = "Can't be empty")
     private String contactDetails;
 

@@ -38,8 +38,17 @@
         </div>
         <div class="form-group">
             <label>Gender</label>
-            <input type="text" th:field="*{gender}" id="gender" placeholder="gender (Male/Female)" class="form-control" >
+            <br />
+
+            <!--            <input type="text" th:field="*{gender}" id="gender" placeholder="gender (Male/Female)" class="form-control" >-->
+<!--            <span th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></span>-->
+            <span th:each="gen: ${gender_value}">
+                   <input type="radio" th:field="*{gender}" th:value="${gen}"/>
+                   <label th:text="${gen}">Gender</label>
+            </span>
+            <br />
             <span th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></span>
+
         </div>
         <div class="form-group">
             <label>Address</label>
@@ -48,7 +57,7 @@
         </div>
         <div class="form-group">
             <label>Contact Details</label>
-            <input type="text" th:field="*{contactDetails}" id="contactDetails" placeholder="contactDetails" class="form-control" >
+            <input type="text" th:field="*{contactDetails}" id="contactDetails" placeholder="phone number (69xxxxxxxx)" class="form-control" pattern="[69][0-9]{9}">
             <span th:if="${#fields.hasErrors('contactDetails')}" th:errors="*{contactDetails}"></span>
         </div>
 
