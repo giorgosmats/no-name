@@ -27,6 +27,7 @@
             <!--                </form>-->
 
             <table class="table table-borderless">
+                <caption></caption>
                 <thead>
                 <tr>
                     <th>Comments</th>
@@ -37,8 +38,18 @@
                 <tbody>
                 <tr th:each="comment : ${comments.iterator()}">
                     <td th:text="${comment.getComment()}"></td>
-                    <td><a th:href="@{/comments/update/{id}(id=${comment.id})}">Edit</a></td>
-                    <td><a th:href="@{/comments/delete/{id}(id=${comment.id})}">Delete</a></td>
+                    <td>
+                        <form th:action="@{/comments/update/{id}(id=${comment.id})}">
+                            <button type="submit" name="submit" value="value" class="btn btn-outline-danger">Edit</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form th:action="@{/comments/delete/{id}(id=${comment.id})}">
+                            <button type="submit" name="submit" value="value" class="btn btn-outline-primary">Delete</button>
+                        </form>
+                    </td>
+<!--                    <td><a th:href="@{/comments/update/{id}(id=${comment.id})}">Edit</a></td>-->
+<!--                    <td><a th:href="@{/comments/delete/{id}(id=${comment.id})}">Delete</a></td>-->
                 </tr>
                 </tbody>
             </table>

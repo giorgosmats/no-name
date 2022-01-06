@@ -40,7 +40,8 @@
 
 <!--                </form>-->
 
-                <table class="table table-borderless">
+                <table class="table table-borderless" >
+                    <caption></caption>
                     <thead>
                     <tr>
 <!--                        <th># <a class="col-md-2" th:href="@{/people/add-person}">Add</a></th>-->
@@ -63,9 +64,24 @@
                         <td th:text="${person.gender}"></td>
                         <td th:text="${person.address}"></td>
                         <td th:text="${person.contactDetails}"></td>
-                        <td><a th:href="@{/people/update/{id}(id=${person.id})}">Edit</a></td>
-                        <td><a th:href="@{/people/comments/{id}(id=${person.id})}">View all comments</a></td>
-                        <td><a th:href="@{/people/delete/{id}(id=${person.id})}">Delete</a></td>
+                        <td>
+                            <form th:action="@{/people/update/{id}(id=${person.id})}">
+                                <button type="submit" name="submit" value="value" class="btn btn-outline-primary">Edit</button>
+                            </form>
+<!--                            <a th:href="@{/people/update/{id}(id=${person.id})}">Edit</a>-->
+                        </td>
+                        <td>
+                            <form th:action="@{/people/comments/{id}(id=${person.id})}">
+                                <button type="submit" name="submit" value="value" class="btn btn-outline-primary">View all comments</button>
+                            </form>
+<!--                            <a th:href="@{/people/comments/{id}(id=${person.id})}">View all comments</a>-->
+                        </td>
+                        <td>
+                            <form th:action="@{/people/delete/{id}(id=${person.id})}">
+                                <button type="submit" name="submit" value="value" class="btn btn-outline-danger">Delete</button>
+                            </form>
+<!--                            <a th:href="@{/people/delete/{id}(id=${person.id})}">Delete</a>-->
+                        </td>
                     </tr>
                     </tbody>
                 </table>
