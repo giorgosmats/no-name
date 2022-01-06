@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-
-
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.List;
@@ -25,12 +25,19 @@ public class Person {
     private Long id;
 
     @Column(unique = true)
+    @Pattern(regexp = "^([\\w-]+(?:\\.[\\w-]+)*)@((?:[\\w-]+\\.)*\\w[\\w-]{0,66})\\.([a-z]{2,6}(?:\\.[a-z]{2})?)$", message = "This is not an email")
     private String email;
+    @NotBlank(message = "Can't be empty")
     private String password;
+    @NotBlank(message = "Can't be empty")
     private String firstName;
+    @NotBlank(message = "Can't be empty")
     private String lastName;
+    @NotBlank(message = "Can't be empty")
     private String gender;
+    @NotBlank(message = "Can't be empty")
     private String address;
+    @NotBlank(message = "Can't be empty")
     private String contactDetails;
 
 //    @DBRef // gia mongo

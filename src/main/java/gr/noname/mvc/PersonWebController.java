@@ -78,7 +78,7 @@ public class PersonWebController {
     }
 
     @PostMapping("/people/addperson")
-    public String addPerson(Person person, BindingResult result, Model model) {
+    public String addPerson(@Validated @ModelAttribute("person")Person person, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "create-person";
         }
