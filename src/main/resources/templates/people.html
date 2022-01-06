@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <!--xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"-->
 <!--/* Title of this template will be passed to the head fragment along with custom links and scripts */-->
 <head>
@@ -30,7 +30,10 @@
 
     <div id="people-list" class="row" >
         <div class="col-md-12" th:switch="${people.totalElements}">
-            <h2 th:case="0">No person found!</h2>
+            <div th:case="0">No person found!
+            </br>
+                <a class="col-md-2" th:href="@{/people/addperson}">Add</a>
+            </div>
             <div th:case="*" >
 <!--                <h2>People</h2>-->
 

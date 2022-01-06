@@ -13,17 +13,19 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.EventListener;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 
-@Configuration
+@Service
 public class LoadDatabase {
 
-    private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
+    //private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
 
     private static final String[] personNames = new String[]{
             "Elpida",
@@ -114,7 +116,8 @@ public class LoadDatabase {
 
 
     private static String generaterandomEmail(long id, String name, String lastName) {
-        return (name.toLowerCase() + lastName.toLowerCase() + id + "@gmail.com");
+
+        return (name.toLowerCase() + lastName.toLowerCase() + id + getRandomUpperBound(500) + "@gmail.com");
     }
 
 
@@ -150,15 +153,15 @@ public class LoadDatabase {
     }
 
 
-    @EventListener(ApplicationReadyEvent.class)
-    public void addData() {
-
-        register();
-
-        //log.info("Preloading " + personRepository.saveAll(generateRandomPeople()));
-        //log.info("Preloading " + commentRepository.saveAll(generateRandomComments()));
-        //log.info("Preloading " + commentRepository.saveAll(generateRandomC(personRepository.findAll())));
-    }
+//    @EventListener(ApplicationReadyEvent.class)
+//    public void addData() {
+//
+//        //register();
+//
+//        //log.info("Preloading " + personRepository.saveAll(generateRandomPeople()));
+//        //log.info("Preloading " + commentRepository.saveAll(generateRandomComments()));
+//        //log.info("Preloading " + commentRepository.saveAll(generateRandomC(personRepository.findAll())));
+//    }
 
 
 }
