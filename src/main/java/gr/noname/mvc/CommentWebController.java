@@ -3,8 +3,8 @@ package gr.noname.mvc;
 import gr.noname.middleware.entities.Comment;
 import gr.noname.middleware.entities.Person;
 import gr.noname.middleware.repositories.CommentRepository;
+import gr.noname.middleware.repositories.PersonRepository;
 import gr.noname.mvc.models.CommentSearch;
-import gr.noname.mvc.models.PersonSearch;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -25,8 +25,12 @@ import java.util.stream.IntStream;
 @Controller
 public class CommentWebController {
     private final CommentRepository repository;
+    private final PersonRepository personRepository;
 
-    CommentWebController(CommentRepository repository) { this.repository = repository; }
+
+    CommentWebController(CommentRepository repository, PersonRepository personRepository) { this.repository = repository;
+        this.personRepository = personRepository;
+    }
 
     @PostMapping("/comments")
     public Object searchCommentSubmit(
@@ -106,8 +110,34 @@ public class CommentWebController {
 
         model.addAttribute("page", page);
         model.addAttribute("comments", c);
+        model.addAttribute("userid", id);
         model.addAttribute("searchModel", new CommentSearch(searchByComment));
         return "person-comments";
+    }
+
+    @GetMapping("/comments/addcomment/{id}")
+    public String addComment(Model model , @PathVariable("id") long id) {
+        Comment comment = new Comment();
+        comment.setPerson(personRepository.getById(id));
+
+        model.addAttribute("userid", id);
+        model.addAttribute("newcomment", comment);
+        return "create-comment";
+    }
+
+    @PostMapping("/comments/addcomment/{id}")
+    public String addComment(@PathVariable("id") long id,@Validated @ModelAttribute("newcomment")Comment newcomment, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "create-comment";
+        }
+System.out.println(newcomment.getId());
+        System.out.println(newcomment.getComment());
+
+        System.out.println(newcomment.getPerson());
+
+        repository.save(newcomment);
+//        model.addAttribute("newcomment", newcomment);
+        return "redirect:/comments";
     }
 
     @GetMapping("/comments/update/{id}")

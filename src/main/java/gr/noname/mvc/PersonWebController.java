@@ -71,6 +71,23 @@ public class PersonWebController {
         return "people";
     }
 
+    @GetMapping("/people/addperson")
+    public String addPerson(Model model) {
+        model.addAttribute("person", new Person());
+        return "create-person";
+    }
+
+    @PostMapping("/people/addperson")
+    public String addPerson(Person person, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "create-person";
+        }
+
+        repository.save(person);
+        model.addAttribute("person", person);
+        return "redirect:/people";
+    }
+
 
     @GetMapping("/people/update/{id}")
     public String updatePerson(@PathVariable("id") long id, Model model) {

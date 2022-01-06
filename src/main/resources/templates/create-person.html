@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <title>Title</title>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<div id="add-comment" class="row" >
+    <form
+            th:action="@{/people/addperson}"
+            th:object="${person}"
+            method="post">
+        <div class="form-group">
+            <label>Email</label>
+            <input type="text" th:field="*{email}" id="email" placeholder="email" class="form-control" >
+            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="text" th:field="*{password}" id="password" placeholder="password" class="form-control" >
+            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+        </div>
+        <div class="form-group">
+            <label>First Name</label>
+            <input type="text" th:field="*{firstName}" id="firstName" placeholder="firstName" class="form-control" >
+            <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
+        </div>
+        <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" th:field="*{lastName}" id="lastName" placeholder="lastName" class="form-control" >
+            <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
+        </div>
+        <div class="form-group">
+            <label>Gender</label>
+            <input type="text" th:field="*{gender}" id="gender" placeholder="gender" class="form-control" >
+            <span th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></span>
+        </div>
+        <div class="form-group">
+            <label>Address</label>
+            <input type="text" th:field="*{address}" id="address" placeholder="address" class="form-control" >
+            <span th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
+        </div>
+        <div class="form-group">
+            <label>Contact Details</label>
+            <input type="text" th:field="*{contactDetails}" id="contactDetails" placeholder="contactDetails" class="form-control" >
+            <span th:if="${#fields.hasErrors('contactDetails')}" th:errors="*{contactDetails}"></span>
+        </div>
+
+        <!--        <div class="form-group">-->
+        <!--            <label for="serialNumber">New Comment</label>-->
+        <!--            <input type="text" th:field="*{serialNumber}" id="serialNumber" placeholder="New Comment" class="form-control">-->
+        <!--            <span th:if="${#fields.hasErrors('serialNumber')}" th:errors="*{serialNumber}"></span>-->
+        <!--        </div>-->
+
+        <button type="submit" class="btn btn-primary mt-5">Create Person</button>
+    </form>
+</div>
+
+
+<div th:replace="fragments/footer :: footer"></div>
+
+
+</body>
+</html>
