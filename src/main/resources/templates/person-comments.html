@@ -90,9 +90,12 @@
                             <span class="sr-only">Next</span>
                         </a>
                     </li>
+                    <li class="page-item"><a class="page-link" th:href="@{/comments/addcomment/{id}(id=${userid})}" >Add Comment</a></li>
+
                 </ul>
+
             </nav>
-            <a class="col-md-2" th:href="@{/comments/addcomment/{id}(id=${userid})}" >Add Comment</a>
+<!--            <a class="col-md-2" th:href="@{/comments/addcomment/{id}(id=${userid})}" >Add Comment</a>-->
 
         </div>
     </div>
