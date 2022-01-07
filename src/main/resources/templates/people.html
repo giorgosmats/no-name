@@ -109,7 +109,7 @@
                         <li class="page-item" th:each="pageNumber : ${pageNumbers}">
                             <a class="page-link"
                                th:style="${pageNumber == page ? 'background:#c7c7c7;' : 'background:initial;'}"
-                               th:href="@{/people(size=${people.size}, page=${pageNumber}, searchByEmail=${searchModel.email})}"
+                               th:href="@{/people(size=${people.size}, page=${pageNumber}, searchByEmail=${searchModel.query})}"
                                th:text="${pageNumber}"></a>
                         </li>
 
@@ -117,7 +117,7 @@
                         <li class="page-item">
                             <a class="page-link"
                                th:style="${people.hasNext ? 'pointer-events:initial;' : 'pointer-events:none;color:#c5c4c4'}"
-                               th:href="@{/people(size=${people.size}, page=${page + 1}, searchByEmail=${searchModel.email})}"
+                               th:href="@{/people(size=${people.size}, page=${page + 1}, searchByEmail=${searchModel.query})}"
                                aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
                                 <span class="sr-only">Next</span>

@@ -5,8 +5,6 @@ import gr.noname.middleware.entities.Comment;
 import gr.noname.middleware.entities.Person;
 import gr.noname.middleware.repositories.CommentRepository;
 import gr.noname.middleware.repositories.PersonRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -18,8 +16,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 
 @Service
@@ -38,7 +34,6 @@ public class LoadDatabase {
 
     private static final String[] personLastNames = new String[]{
             "Matsiras",
-            "W",
             "L",
             "D",
             "R",
@@ -47,19 +42,19 @@ public class LoadDatabase {
     };
 
     private static final String[] addresses = new String[]{
-            "Athens ..",
-            "Thessaloniki ..",
-            "Larisa ..",
-            "Kos ..",
+            "El. Venizelou 44",
+            "Zaimi 11",
+            "Lambrou Katsoni 55",
+            "Amfitheas 148",
     };
 
-    private static final String[] randomWords = new String[]{
-            "den ",
-            "mporw ",
-            "simera ",
-            "fai ",
-            "tainia ",
-            "makaronia "
+    private static final String[] randomComments = new String[]{
+            "Very good",
+            "Thanks",
+            "I agree with you",
+            "I'm planning a visit",
+            "Can you take me a photo",
+            "I'm positive"
     };
 
     @Autowired
@@ -106,7 +101,7 @@ public class LoadDatabase {
         for (int i = 0; i < count; i++) {
             comments.add(
                     new Comment(
-                            randomWords[getRandomUpperBound(randomWords.length)],
+                            randomComments[getRandomUpperBound(randomComments.length)],
                             person
                     )
             );

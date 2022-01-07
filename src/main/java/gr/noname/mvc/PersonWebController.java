@@ -32,7 +32,7 @@ public class PersonWebController {
     @PostMapping("/people")
     public Object searchPeopleSubmit(
             @ModelAttribute PersonSearch searchModel) {
-        return "redirect:/people?searchByEmail=" + searchModel.getEmail();
+        return "redirect:/people?search=" + searchModel.getQuery();
     }
 
     @GetMapping("/people")
@@ -40,15 +40,15 @@ public class PersonWebController {
             Model model,
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "10") int size,
-            @RequestParam(defaultValue = "") String searchByEmail
+            @RequestParam(defaultValue = "") String search
     ) {
         if (page < 1) {
             return new RedirectView("/people?page=1&size="+ size);
         };
 
         Page<Person> people = findPaginated(
-                !searchByEmail.equals("") ?
-                        repository.findByEmailStartingWith(searchByEmail):
+                !search.equals("") ?
+                        repository.freeTextSearch(search):
                         repository.findAll(),
                 PageRequest.of(page - 1, size)
         );
@@ -69,7 +69,7 @@ public class PersonWebController {
 
         model.addAttribute("page", page);
         model.addAttribute("people", people);
-        model.addAttribute("searchModel", new PersonSearch(searchByEmail));
+        model.addAttribute("searchModel", new PersonSearch(search));
         return "people";
     }
 
