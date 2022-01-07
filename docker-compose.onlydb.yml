@@ -22,19 +22,3 @@ services:
       - $PHPMYADMIN_LOCAL_PORT:$PHPMYADMIN_DOCKER_PORT
     depends_on:
       - no-name-mysql
-
-
-  no-name:
-    build: .
-    container_name: "no-name"
-    platform: linux/amd64
-    ports:
-      - $SPRING_LOCAL_PORT:$SPRING_DOCKER_PORT
-    links:
-      - no-name-mysql
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://no-name-mysql:$MYSQLDB_DOCKER_PORT/$MYSQLDB_DATABASE
-      SPRING_DATASOURCE_USERNAME: $MYSQLDB_USER
-      SPRING_DATASOURCE_PASSWORD: $MYSQLDB_ROOT_PASSWORD
-    depends_on:
-      - no-name-mysql

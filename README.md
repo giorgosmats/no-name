@@ -30,14 +30,23 @@ Import it on your preffered IDE (Eclipse/Intellij/VS Code)
 
 ### Run this project
 
-1. Run this command on terminal to start database:
+1. Maven package this application into .jar
+
+```$shell
+./mvnw package -Dmaven.test.skip
+```
+
+2. Run this command on terminal to start database:
 
 ```$shell
 docker-compose up
 ```
 
-2. If you want to run app without docker App Container, try this command on terminal:
+3. If you want to run the app without docker App Container, try these commands on terminal:
 
+```$shell
+docker-compose -f docker-compose.dbonly.yml up
+```
 ```$shell
 ./mvnw spring-boot:run
 ```
