@@ -1,0 +1,44 @@
+#version: '3'
+#services:
+#  no-name:
+#    build: .
+#    container_name: no-name
+#    ports:
+#      - 8080:8080
+#
+
+
+
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/test_db
+#      SPRING_DATASOURCE_USERNAME: root
+#      SPRING_DATASOURCE_PASSWORD: root
+
+#version: "3.8"
+#services:
+#  mongodb:
+#    image: mongodb
+#    container_name: mongodb
+#    ports:
+#      - "27017:27017"
+#    volumes:
+#      - data:/data
+#    environment:
+#      MONGO_INITDB_ROOT_USERNAME: rootuser
+#      MONGO_INITDB_ROOT_PASSWORD: rootpass
+#  mongo-express:
+#    image: mongo-express
+#    container_name: mongo-express
+#    restart: always
+#    ports:
+#      - "8081:8081"
+#    environment:
+#      - ME_CONFIG_MONGODB_ADMINUSERNAME=rootuser
+#      - ME_CONFIG_MONGODB_ADMINPASSWORD=rootpass
+#      - ME_CONFIG_MONGODB_SERVER=mongodb
+#volumes:
+#  data: {}
+#
+#networks:
+#  default:
+#    name: mongodb_network

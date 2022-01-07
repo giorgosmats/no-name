@@ -1,36 +1,38 @@
-version: '2'
+version: '3'
 services:
+  no-name-mysql:
+    image: mysql:5.7.36
+    container_name: no-name-mysql
+    platform: linux/amd64
+    #    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test_db
+    ports:
+      - "3306:3306"
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: "no_name_phpmyadmin"
+    platform: linux/amd64
+    #    restart: always
+    environment:
+      PMA_HOST: no-name-mysql
+      PMA_USER: root
+      PMA_PASSWORD: root
+    ports:
+      - "8081:80"
+    depends_on:
+      - no-name-mysql
+
+
   no-name:
     build: .
     container_name: no-name
     ports:
       - 8080:8080
-
-#version: "3.8"
-#services:
-#  mongodb:
-#    image: mongodb
-#    container_name: mongodb
-#    ports:
-#      - "27017:27017"
-#    volumes:
-#      - data:/data
-#    environment:
-#      MONGO_INITDB_ROOT_USERNAME: rootuser
-#      MONGO_INITDB_ROOT_PASSWORD: rootpass
-#  mongo-express:
-#    image: mongo-express
-#    container_name: mongo-express
-#    restart: always
-#    ports:
-#      - "8081:8081"
-#    environment:
-#      - ME_CONFIG_MONGODB_ADMINUSERNAME=rootuser
-#      - ME_CONFIG_MONGODB_ADMINPASSWORD=rootpass
-#      - ME_CONFIG_MONGODB_SERVER=mongodb
-#volumes:
-#  data: {}
-#
-#networks:
-#  default:
-#    name: mongodb_network
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://no-name-mysql:3306/test_db
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    depends_on:
+      - no-name-mysql
