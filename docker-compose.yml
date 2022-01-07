@@ -27,9 +27,12 @@ services:
 
   no-name:
     build: .
-    container_name: no-name
+    container_name: "no-name"
+    platform: linux/amd64
     ports:
       - 8080:8080
+    links:
+      - no-name-mysql
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://no-name-mysql:3306/test_db
       SPRING_DATASOURCE_USERNAME: root
