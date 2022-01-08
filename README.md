@@ -45,7 +45,7 @@ docker-compose up
 3. If you want to run the app without docker App Container, try these commands on terminal:
 
 ```$shell
-docker-compose -f docker-compose.dbonly.yml up
+docker-compose -f docker-compose.onlydb.yml up
 ```
 ```$shell
 ./mvnw spring-boot:run
