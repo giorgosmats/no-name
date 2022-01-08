@@ -2,7 +2,6 @@ package gr.noname.rest;
 
 import gr.noname.middleware.entities.Person;
 import gr.noname.middleware.repositories.PersonRepository;
-import org.aspectj.weaver.patterns.PerObject;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

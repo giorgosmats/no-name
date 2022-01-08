@@ -1,6 +1,5 @@
 package gr.noname.mvc;
 
-import gr.noname.middleware.entities.Comment;
 import gr.noname.middleware.entities.Gender;
 import gr.noname.middleware.entities.Person;
 import gr.noname.middleware.repositories.CommentRepository;
@@ -17,7 +16,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -54,7 +52,6 @@ public class PersonWebController {
         );
 
         int totalPages = people.getTotalPages();
-        //System.out.println(totalPages);
 
         if (page > totalPages) {
             //return new RedirectView("/people?size="+ size + "&page=" + totalPages);

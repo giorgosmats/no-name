@@ -1,7 +1,6 @@
 package gr.noname.mvc;
 
 import gr.noname.middleware.entities.Comment;
-import gr.noname.middleware.entities.Person;
 import gr.noname.middleware.repositories.CommentRepository;
 import gr.noname.middleware.repositories.PersonRepository;
 import gr.noname.mvc.models.CommentSearch;
@@ -49,8 +48,6 @@ public class CommentWebController {
             return new RedirectView("/comments?page=1&size="+ size);
         };
 
-        //Page<Comment> comments = findPaginated(repository.findAll(), PageRequest.of(page - 1, size));
-
         Page<Comment> comments = findPaginated(
                 !searchByComment.equals("") ?
                         repository.findByCommentStartingWith(searchByComment):
@@ -83,11 +80,9 @@ public class CommentWebController {
     {
         List<Comment> comments = new ArrayList<>();
         List<Comment> allComments = repository.findAll();
-//        System.out.println(allComments[(int)id].getPerson());
         for (Comment comment : allComments) {
             if (comment.getPerson().getId().equals(id)) {
                 comments.add(comment);
-//                System.out.println(id);
             }
         }
         if (page < 1) {
@@ -130,13 +125,8 @@ public class CommentWebController {
         if (result.hasErrors()) {
             return "create-comment";
         }
-System.out.println(newcomment.getId());
-        System.out.println(newcomment.getComment());
-
-        System.out.println(newcomment.getPerson());
 
         repository.save(newcomment);
-//        model.addAttribute("newcomment", newcomment);
         return "redirect:/comments";
     }
 

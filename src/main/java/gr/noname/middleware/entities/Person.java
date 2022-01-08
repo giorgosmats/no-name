@@ -8,19 +8,16 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Data
 //@Getter
 //@Setter
 @Entity
-//@Document(collection = "person") //gia mongo
 public class Person {
 
-    //@Id // gia mongo
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -37,13 +34,9 @@ public class Person {
     private String gender;
     @NotBlank(message = "Can't be empty")
     private String address;
-//    @Pattern(regexp = "^\\d{10}$", message = "Phone number must be 10 digits")
     @NotBlank(message = "Can't be empty")
     private String contactDetails;
 
-//    @DBRef // gia mongo
-//    @JsonBackReference // gia mongo
-//    private List<Comment> comments; // gia mongo
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
     @JsonBackReference

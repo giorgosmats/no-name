@@ -3,13 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
-    <title>Title</title>
+    <title>Person Comments</title>
 </head>
 <body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
-<header></header>
 
 <div th:replace="fragments/navbar :: navbar"></div>
 
@@ -21,13 +18,6 @@
             <a class="col-md-2" th:href="@{/comments/addcomment/{id}(id=${userid})}" >Add Comment</a>
         </div>
         <div th:case="*" >
-            <!--                <h2>People</h2>-->
-
-            <!--                <form th:action="@{/people}" th:object="${searchModel}" method="post" class="form-inline">-->
-
-            <!--                    <input class="form-control mr-sm-2" th:field="*{email}"  type="search" placeholder="Search by email" aria-label="Search" />-->
-
-            <!--                </form>-->
 
             <table class="table table-borderless">
                 <caption></caption>
@@ -51,12 +41,9 @@
                             <button type="submit" name="submit" value="value" class="btn btn-outline-primary">Delete</button>
                         </form>
                     </td>
-<!--                    <td><a th:href="@{/comments/update/{id}(id=${comment.id})}">Edit</a></td>-->
-<!--                    <td><a th:href="@{/comments/delete/{id}(id=${comment.id})}">Delete</a></td>-->
                 </tr>
                 </tbody>
             </table>
-
 
             <nav>
                 <ul class="pagination">
@@ -95,7 +82,6 @@
                 </ul>
 
             </nav>
-<!--            <a class="col-md-2" th:href="@{/comments/addcomment/{id}(id=${userid})}" >Add Comment</a>-->
 
         </div>
     </div>

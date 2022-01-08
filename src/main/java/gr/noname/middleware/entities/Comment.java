@@ -7,14 +7,12 @@ import lombok.Setter;
 import javax.persistence.*;
 
 
-//@Document(collection = "comment") // gia mongo
+
 @Getter
 @Setter
 //@Data
 @Entity
 public class Comment {
-
-//    @Id //gia mongo
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +21,7 @@ public class Comment {
 
     private String comment;
 
-    @ManyToOne //(fetch=FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "person_id")
     private Person person ;
 

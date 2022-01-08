@@ -1,16 +1,10 @@
 package gr.noname;
 
-
 import gr.noname.middleware.entities.Comment;
 import gr.noname.middleware.entities.Person;
 import gr.noname.middleware.repositories.CommentRepository;
 import gr.noname.middleware.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,8 +14,6 @@ import java.util.Random;
 
 @Service
 public class LoadDatabase {
-
-    //private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
 
     private static final String[] personNames = new String[]{
             "Elpida",
@@ -81,7 +73,7 @@ public class LoadDatabase {
                     name,
                     lastName,
                     getGender(g),
-                    addresses[getRandomUpperBound(addresses.length)] + " " + getRandomUpperBound(100),
+                    addresses[getRandomUpperBound(addresses.length)],
                     "69" + (getRandomUpperBound(9999999)+10000000)
             );
 
@@ -147,16 +139,6 @@ public class LoadDatabase {
 
     }
 
-
-//    @EventListener(ApplicationReadyEvent.class)
-//    public void addData() {
-//
-//        //register();
-//
-//        //log.info("Preloading " + personRepository.saveAll(generateRandomPeople()));
-//        //log.info("Preloading " + commentRepository.saveAll(generateRandomComments()));
-//        //log.info("Preloading " + commentRepository.saveAll(generateRandomC(personRepository.findAll())));
-//    }
 
 
 }
